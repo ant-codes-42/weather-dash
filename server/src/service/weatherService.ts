@@ -1,38 +1,7 @@
-//import dotenv from 'dotenv';
-//dotenv.config();
-
-// TODO: Define an interface for the Coordinates object
-
-// TODO: Define a class for the Weather object
-
-// TODO: Complete the WeatherService class
-//class WeatherService {
-// TODO: Define the baseURL, API key, and city name properties
-// TODO: Create fetchLocationData method
-// private async fetchLocationData(query: string) {}
-// TODO: Create destructureLocationData method
-// private destructureLocationData(locationData: Coordinates): Coordinates {}
-// TODO: Create buildGeocodeQuery method
-// private buildGeocodeQuery(): string {}
-// TODO: Create buildWeatherQuery method
-// private buildWeatherQuery(coordinates: Coordinates): string {}
-// TODO: Create fetchAndDestructureLocationData method
-// private async fetchAndDestructureLocationData() {}
-// TODO: Create fetchWeatherData method
-// private async fetchWeatherData(coordinates: Coordinates) {}
-// TODO: Build parseCurrentWeather method
-// private parseCurrentWeather(response: any) {}
-// TODO: Complete buildForecastArray method
-// private buildForecastArray(currentWeather: Weather, weatherData: any[]) {}
-// TODO: Complete getWeatherForCity method
-// async getWeatherForCity(city: string) {}
-//}
-
 import dayjs, { type Dayjs } from 'dayjs';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// TODO: Define an interface for the Coordinates object
 interface Coordinates {
   name: string;
   lat: number;
@@ -41,7 +10,6 @@ interface Coordinates {
   state: string;
 }
 
-// TODO: Define a class for the Weather object
 export class Weather {
   city: string;
   date: Dayjs | string;
@@ -69,7 +37,6 @@ export class Weather {
   }
 }
 
-// TODO: Complete the WeatherService class
 class WeatherService {
 
   private baseURL?: string;
@@ -83,9 +50,9 @@ class WeatherService {
 
     this.apiKey = process.env.API_KEY || '';
   }
-  // TODO: method to fetch weather based on city 
+  // Get current weather by city
   async getWeatherForCity(city: string) {
-    //Fetch weather based on city logic
+    
     this.city = city;
     const coordsArray: Coordinates[] = await this.convertCityToCoords(this.city);
 
@@ -113,9 +80,9 @@ class WeatherService {
     }
   }
 
-  // TODO: method to fetch 5 day forecast based on lon and lat 
+  // Get 5 day / 3 hour forecast by city - store in array and return
   async getForecastForCity(city: string) {
-    //Fetch 5 day forecast based on city logic
+    // Convert city to coordinates
     const coordsArray: Coordinates[] = await this.convertCityToCoords(city);
 
     try {
@@ -145,7 +112,7 @@ class WeatherService {
       return err;
   }
 }
-
+  // Convert city name to coordinates
   async convertCityToCoords(city: string): Promise<Coordinates[]> {
     try {
       const response = await fetch(
@@ -170,6 +137,5 @@ class WeatherService {
     }
   }
 }
-//export default new WeatherService();
 
 export default new WeatherService();
